@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<form action="/oracle/regist" method="POST">
+  <div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+<!-- 
+   <tag의 속성 중 id, name의 대해서>
+   1) 공통점 - 태그 요소간의 구분
+   2) 차이점
+      - id는 중복허용 X, name은 중복 허용O, name 중복될 경우 js는 배열로 인식
+      - name의 경우 서버로 전송시 변수역할을 하며, 이때의 명칭은 "'전송 파라미터"로 표현
+ -->
+    
+   
+    <input type="text"          placeholder=   "Enter Your ID.."          name="login_id" required> <input type="password" placeholder="Enter Your Password.."
+            name="password" required> <input type="text"          placeholder=   "Enter Your name.."       name="name" required>
+   <input type="text"          placeholder=   "Enter Your email.."       name="email" required>
+   <input type="text"          placeholder=   "Enter Your phone.."       name="phone" required>
+   <input type="text"          placeholder=   "Enter Your adress.."       name="address" required>
+   <!-- 
+   button 태그는 디폴트가 submit 속성을 가지므로, 사용자가 클릭 시 무조건 전송이 일어남
+   따라서 이 타이밍을 놓치지 말고 개발자는 원하는 주소와 전송방법을 선택해서 제어해야 한다.            
+      -->
+    <button type="submit" class="registerbtn">Register</button>
+  </div>
+  
+  <div class="container signin">
+    <p>Already have an account? <a href="#">Sign in</a>.</p>
+  </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>basicapp2</display-name>
+	<!-- 웹브라우저로 정적 자원(html,css,js)를 직접 파일명을 명시하여 브라우저가 다운로드 받아갈 수 있지만 java의 
+		클래스는 정적 자원이 아니므로, 브라우저로 직접 명시하여 다운로드 받아갈 수 없다.. 브라우저의 요청이 서블릿일 경우, 정적자원과는 
+		달리 WAS가 서버에서 브라우저에게 그냥 보내주는 것이라, 서버에서 실행하고, 그 결과만을 보내준다.. 또한 브라우저가 클래스를 직접 
+		접근할 수 없으므로 아래의 서블릿 매핑을 통해 요청을 받 -->
+	<servlet>
+		<servlet-name>baboServlet</servlet-name>
+		<servlet-class>com.hexagon.basicapp.controller.MyServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>baboServlet</servlet-name>
+		<url-pattern>/babo</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>loginServlet</servlet-name>
+		<servlet-class>com.hexagon.basicapp.controller.LoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>loginServlet</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	
+</web-app>

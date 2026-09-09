@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function login() {
+		//유저가 입력한 컴포넌트드르이 값을 백엔드 서버로 전송한다!!
+		//HTTP 프로토콜에서 전송 방식에는 여러가지가 있다..
+		//POST,GET,PUT,DELETE...
+		//이중 서버에 무언가를 입력을 위해 요청할때는 POST방식으로 요청을 시도해야 한다..
+		
+		
+	}
+
+
+</script>
+</head>
+<body>
+
+<form method="post" action="/login">
+<div>
+<input type="text" placeholder="Your ID.." name="id">
+</div>
+<div>
+<input type="password" placeholder="Your password.."name="password">
+</div>
+<div>
+	<button onClick="login()">로그인</button>
+	<button>회원가입</button>
+</div>
+</form>
+
+</body>
+</html>

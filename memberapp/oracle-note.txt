@@ -1,0 +1,24 @@
+SQL> --oracle 12c 버전이상 즉 최신 버전부터는 유저가 사용하게될 영역을 XEPDB1으로 구분하고 있있으므로
+SQL> --접속시 반드시 XEPDB1을 명시해야 아래의 실습이 제대로 될것임..
+SQL> --우리마느이 데이터베이스 구축
+SQL> CREATE TABLESPACE MYSPACE
+  2  DATAFILE 'C:\app\user\product\21c\oradata\XE\XEPDB1\MYSPACE.DBF' SIZE 20M;
+
+테이블스페이스가 생성되었습니다.
+
+SQL> --유저를 생성하고 MYSPACE 에서 살아가도록 하자
+SQL> CREATE USER WEB
+  2  IDENTIFIED BY 1234
+  3  DEFAULT TABLESPACE MYSPACE
+  4  QUOTA UNLIMITED ON MYSPACE;
+
+사용자가 생성되었습니다.
+
+SQL> --이 유저에게 접속,테이블,시퀸스에 대한 권한을 부여하자
+SQL> 
+SQL> --DCL 명령중 권한을 부여하는 GRANT 명령을 사용해보자
+SQL> GRANT CREATE SESSION, CREATE TABLE, CREATE SEQUENCE TO WEB;
+
+권한이 부여되었습니다.
+
+SQL> SPOOL OFF

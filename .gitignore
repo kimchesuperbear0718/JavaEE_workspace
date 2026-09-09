@@ -1,0 +1,20 @@
+# Eclipse workspace metadata and local server configuration
+.metadata/
+Servers/
+**/.settings/
+**/.classpath
+**/.project
+**/.factorypath
+
+# Build output
+**/target/
+**/build/
+**/bin/
+*.class
+
+# Local dependency copies and logs
+*.jar
+*.log
+
+# Generated database console output
+SQL spool*.txt
