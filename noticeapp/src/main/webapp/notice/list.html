@@ -1,0 +1,89 @@
+<%@page contentType="text/html;charset=utf-8" %>
+<%!
+
+int age=30;
+
+
+public String getName(){
+	return "고양이";
+%>
+<!-- 
+1)Jsp란?
+	JAVA SERVER PAGE 의 줄임말 = java 기술로 작성된 서버측에서 실행되는 페이지 = 서블릿
+	 
+	 
+	 2.JSP작성 영역(JSP 코드를 작성할 수 있는 영역)
+	 1)지시영역
+	 
+	 2)선언부
+	 
+	 3)스크립틀릿 영역-
+	 [%%]영역은 서블릿의 service() 메서드 영역이었다!!!(doXXX형의 영역으로 생각해도 된다)
+	 4)표현식
+	 개발자가 out.print()를 굳이 사용하지 않고도-->
+	 <%
+	 //우리가 전에 사용했던 ListServlet.java도 리스트를 처리할수 있었지만,디자인 표현에는 너무 비효울적이었다
+	 //처리할 파일이 디자인표현이 포함되어 있다면 jsp가 서블릿보단 더 나은 선택이 될수있다
+	 
+	 //JSP에서는 개발 시 필수적으로 사용되는 객체들을 미리 Tomcat 이 기동되는 시험
+	 //부터 메모리에 올려놓고 그 이름 마저도 정해놓았는데,
+	 
+	 %>
+	 
+	 
+	 
+	 
+	 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+<h2>Zebra Striped Table</h2>
+<p>For zebra-striped tables, use the nth-child() selector and add a background-color to all even (or odd) table rows:</p>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Points</th>
+  </tr>
+  <%for(int i=1;;i<=20;i++){ %>
+  <tr>
+    <td>Jill</td>
+    <!-- 주의 할점 = 은 out.print()대신하는 표현식이지만 out.print -->>
+    <td><%="Smith"+i %></td>
+    <td>50</td>
+  </tr>
+  <%}%>
+  <tr>
+  <td colspan="3">
+  <button>글쓰기</button>
+  </td>
+  
+  </tr>
+  
+</table>
+
+</body>
+</html>
