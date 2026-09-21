@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 16px;
+	resize: vertical;
+}
+
+input[type=button] {
+	background-color: #04AA6D;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type=button]:hover {
+	background-color: #45a049;
+}
+
+.container {
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	padding: 20px;
+}
+</style>
+<!-- 외부의 js 라이브러리 가져오기  
+	참고로 min.js 에서 가독성보다는 파일의 용량을 줄이기 위해 모든 코드의 줄바꿈 및 공백을 제거한 버전
+-->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+	/*
+	 1) JQuery 란?
+	 2006 년도 쯤에 미국의 한 아저씨가 js를 어떻게 하면 코드량을 좀더 줄여쓸 수 있는지를 고민하여 js 라이브러리를 제작함
+	 JQuery 임..
+	
+	 2) 인기있었던 이유
+	 비개발자들도 js를 잘 몰라도 손쉽게 에니메이션 효과 등을 부여할 수 있었음
+	
+	 3) JQuery의 구문 형식 
+	
+	 JQuery는 결국 문서내의 어떤 요소에 어떤 효과를 줄지에 관한 문법을 구조를 가지고 있음
+	
+	 [syntax]
+	 (누구를==css의 선택자).어떻게()
+	 */
+
+	//body tag에 onLoad 이벤트핸들러 적용한 것과 동일한 효과(차이점이라면 프로그래밍적으로 이벤트를 구현한 것일뿐임 )
+	/*
+	addEventListener("load", function(){
+		test();
+	});
+	
+	function test(){
+		document.getElementById("bt_write").addEventListener("click", function(){
+			alert("글쓰기 버튼 눌렀어?");
+		}); //버튼과 리스너 연결
+	}
+	 */
+
+	//위의 모든 js 코드를 jquery로 단순화 시켜보자!!
+	/*
+	$(document).ready(function(){
+		alert("문서가 준비되었어");
+	});
+	 */
+
+	$(function() { //onLoad 와 동일!!!
+		//문서내의 bt_id를 클릭하면...을 jquery로 표현하면
+		$("#bt_write").click(function() {
+			//현재 사용자가 입력한 폼을 서버로 전송!!
+			let form1 = document.getElementById("form1");//문서내의 form태그에 대응되는 form dom 객체를 얻어옴
+			form1.action = "/notice/regist"; // form 태그의 action attribute는 form객체에서는 property(객체가 보유한 변수)로 사용됨
+			form1.method = "POST"; //HTTP 의 통신 방법 중, POST를 사용하면 많은 양의 데이터를 서버로 전송할 수 있다. 이는 우편시스템에서 편지지나 소포로 
+			//전송하는 것과 같다
+			form1.submit();
+		});
+	});
+</script>
+</head>
+<body>
+
+	<h3>Contact Form</h3>
+
+	<div class="container">
+		<form id="form1">
+
+			<input type="text" id="title" name="title" placeholder="제목입력..">
+			<input type="text" name="writer" placeholder="작성자 입력..">
+			<textarea name="content" placeholder="Write something.."
+				style="height: 200px"></textarea>
+
+			<input type="button" value="글등록" id="bt_write"> <input
+				type="button" value="리스트" id="bt_list">
+
+		</form>
+	</div>
+
+</body>
+</html>
