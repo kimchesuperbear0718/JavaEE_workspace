@@ -7,14 +7,25 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+import com.hexagon.noticeapp.pool.PoolManager;
 
 // 글쓰기 요청을 처리하는 서블릿 클래스
 public class RegistServlet extends HttpServlet {
-
+	//앞으로 커넥션풀로부터 Connection을 얻거나 반납하는 코드는 각 클래스나 jsp에서 직접하지 말고, poolManager를 이용하자!!!
+	PoolManager pool;
+	
+	
+	
+	
+	
 	// 글쓰기 요청은 POST 방식으로 처리해야 하므로 doXXX 형 메서드 중 doPost를 재정의 하자
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,19 +51,27 @@ public class RegistServlet extends HttpServlet {
 		/*
 		 * 1.드라이버 로드 2.접속 3.쿼리실행 4.접속 해제
 		 */
+		
+		
+		pool=new PoolManager();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
+			
+			con=pool.getConnection();
+			//Class.forName("oracle.jdbc.OracleDriver");
 			System.out.println("드라이버 로드 성공");
+			
+			//DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/myoracle");
+			
+			
+			//풀 사용하기 위해서,JNDI
 
-			String dbUrl = System.getenv("ORACLE_DB_URL");
-			String dbUser = System.getenv("ORACLE_DB_USER");
-			String dbPassword = System.getenv("ORACLE_DB_PASSWORD");
-			con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+			//con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 			if (con == null) {
 				System.out.println("뻑유맨");
-			} else {
+			} 
+			else {
 				System.out.println("접속성공");
 			}
 			//쿼리실행 DML 중 insert 수행
@@ -76,19 +95,18 @@ public class RegistServlet extends HttpServlet {
 				//클라이언트에게 응답 정보로 보내게 된다.따라서 우리의 경우 성공메시지를 보여주고 ,
 				out.print("<script>");
 				out.print("alert('등록성공');");
-				out.print("location.href='/notice/list.html';");
+				out.print("location.href='/notice/list.jsp';");//지정한 url인 list.jsp로,웹브라우저가 다시 접속함
 				out.print("</script>");
 			}else {
 				System.out.println("등록실패");
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			try {
 				if (pstmt!=null) pstmt.close();
-				if (con!=null) con.close();
+				if(pstmt!=null)con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

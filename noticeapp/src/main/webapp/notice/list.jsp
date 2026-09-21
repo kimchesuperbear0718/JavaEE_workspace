@@ -1,3 +1,5 @@
+<%@page import="javax.sql.DataSource"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -39,15 +41,15 @@
 // 갖는 내장된 객체들을 가리켜 JSP의 내장(bulit-in) 객체라 한다
 // 1) out 내장객체 - 이미 메모리에 올려놓았다 out 이란 이름으로..
 out.print("AAAA");
-Connection con = null;
+
+
+InitialContext ctx = new InitialContext();//커넥션풀에 접근하기 위한 JNDI 검색 객체
+DataSource ds=(DataSource)ctx.lookup("java:comp/env/jdbc/myoracle");
+
+Connection con=ds.getConnection();
 PreparedStatement pstmt = null;
 ResultSet rs = null;
 
-Class.forName("oracle.jdbc.driver.OracleDriver");
-String dbUrl = System.getenv("ORACLE_DB_URL");
-String dbUser = System.getenv("ORACLE_DB_USER");
-String dbPassword = System.getenv("ORACLE_DB_PASSWORD");
-con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
 StringBuffer sql = new StringBuffer();
 sql.append("select * from notice order by notice_id desc");
@@ -113,7 +115,7 @@ tr:nth-child(even) {
 		%>
 		<tr>
 			<td colspan="3">
-				<button>ê¸ì°ê¸°</button>
+				<button onclick="location.href='/notice/write.html';">글쓰기</button>
 			</td>
 		</tr>
 
